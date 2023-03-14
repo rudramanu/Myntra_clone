@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/product.css">
+    <link rel="stylesheet" href="./CSS/index1.css">
+    <link rel="stylesheet" href="./CSS/footer.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/f90c67bbfa.js" crossorigin="anonymous"></script>
+    
+    <title>Upstyle | Products</title>
+</head>
+
+<body onload="loadingFun()">
+    <div id="navbar"></div>
+
+    <div id="loading"></div>
+
+	<section id="product-section">
+
+    <div class="top-header-div">
+        <h2 class="page-header">Men Shirts</h2>
+        <select name="filter" onclick="sortFilter()" id="filter">
+            <option >SORT BY</option>
+            <option  value="HighToLow">Price: High to Low</option>
+            <option  value="LowToHigh">Price: Low to High</option>
+            <option value="recomended">Recomended</option>
+            <option >Whats New</option>
+            <option >Popularity</option>
+            <option >Better Discount</option>
+            <option  value="top">Top Rated</option>
+            <option>Customer Rating</option>
+        </select>
+
+    </div>
+    <div class="shop-page">
+        <div class="shop-filter-desktop">
+            <p class="filter-head-p">FILTERS</p>
+            <div class="size-range">
+                <p>CATEGORIES</p>
+                <div>
+                    <input value="T-shirt" type="checkbox" class="size-checkbox" name="size-range"
+                        onclick="sizeRange(this)"><label for="">Tshirts</label>
+                </div>
+                <div>
+                    <input value="Lounge Tshirts" type="checkbox" class="size-checkbox" name="size-range"
+                        onclick="sizeRange(this)"><label for="">Lounge Tshirts</label>
+                </div>
+            </div>
+            <div class="size-range">
+                <p>BRANDS</p>
+                <div>
+                    <input value="Roadster" type="checkbox" class="size-checkbox" name="brand-range"
+                        onclick="brandRange(this)"><label for="">Roadster</label>
+                </div>
+                <div>
+                    <input value="Tommy-Hilfiger" type="checkbox" class="size-checkbox" name="brand-range"
+                        onclick="brandRange(this)"><label for="">Tommy Hilfiger</label>
+                </div>
+                <div>
+                    <input value="U.S-Polo" type="checkbox" class="size-checkbox" name="brand-range"
+                        onclick="brandRange(this)"><label for="">U.S. Polo Assn</label>
+                </div>
+                <div>
+                    <input value="WROGN" type="checkbox" class="size-checkbox" name="brand-range"
+                        onclick="brandRange(this)"><label for="">WROGN</label>
+                </div>
+                <div>
+                    <input value="Jack-Jones" type="checkbox" class="size-checkbox" name="brand-range"
+                        onclick="brandRange(this)"><label for="">Jack & Jones</label>
+                </div>
+                <div>
+                    <input value="HRX" type="checkbox" class="size-checkbox" name="brand-range"
+                        onclick="brandRange(this)"><label for="">HRX by Hrithik Roshan</label>
+                </div>
+                <div>
+                    <input value="HERE-NOW" type="checkbox" class="size-checkbox" name="brand-range"
+                        onclick="brandRange(this)"><label for="">HERE&NOW</label>
+                </div>
+                <div>
+                    <input value="Puma" type="checkbox" class="size-checkbox" name="brand-range"
+                        onclick="brandRange(this)"><label for="">Puma</label>
+                </div>
+                <p class="more-p">+594 more</p>
+            </div>
+            <div class="size-range">
+                <p>PRICE</p>
+                <div>
+                    <input value="3850" type="checkbox" class="size-checkbox" name="price-range"
+                        onclick="priceRange(this)"><label for="">Rs. 199 to Rs. 3850</label>
+                </div>
+                <div>
+                    <input value="7501" type="checkbox" class="size-checkbox" name="price-range"
+                        onclick="priceRange(this)"><label for="">Rs. 3850 to Rs. 7501</label>
+                </div>
+                <div>
+                    <input value="11152" type="checkbox" class="size-checkbox" name="price-range"
+                        onclick="priceRange(this)"><label for="">Rs. 7501 to Rs. 11152</label>
+                </div>
+                <div>
+                    <input value="14803" type="checkbox" class="size-checkbox" name="price-range"
+                        onclick="priceRange(this)"><label for="">Rs. 11152 to Rs. 14803</label>
+                </div>
+            </div>
+
+            <div class="size-range">
+                <p>COLOR</p>
+                <div>
+                    <input value="black" onclick="colorRange(this)" type="checkbox" class="size-checkbox" name="color-range"><div class="color-black"></div> <label for="">Black</label>
+                </div>
+                <div>
+                    <input value="blue" onclick="colorRange(this)" type="checkbox" class="size-checkbox" name="color-range"><div class="color-blue"></div> <label for="">Blue</label>
+                </div>
+                <div>
+                    <input value="white" onclick="colorRange(this)" type="checkbox" class="size-checkbox" name="color-range"><div class="color-white"></div> <label for="">White</label>
+                </div>
+                <div>
+                    <input value="navyBlue" onclick="colorRange(this)" type="checkbox" class="size-checkbox" name="color-range"><div class="color-navyBlue"></div><label for="">Navy Blue</label>
+                </div>
+                <div>
+                    <input value="green" onclick="colorRange(this)" type="checkbox" class="size-checkbox" name="color-range"><div class="color-green"></div><label for="">Green</label>
+                </div>
+                <div>
+                    <input value="red" onclick="colorRange(this)" type="checkbox" class="size-checkbox" name="color-range"><div class="color-red"></div><label for="">Red</label>
+                </div>
+                <div>
+                    <input value="grey" onclick="colorRange(this)" type="checkbox" class="size-checkbox" name="color-range"><div class="color-grey"></div><label for="">Grey</label>
+                </div>
+                <div><p class="more-p">+39 more</p></div>
+            </div>
+            <div class="size-range">
+                <h3>Benefit</h3>
+                <div>
+                    <input type="checkbox" class="size-checkbox"><label for="">Water Resistant </label>
+                </div>
+                <div>
+                    <input type="checkbox" class="size-checkbox"><label for="">Warmth</label>
+                </div>
+                <div>
+                    <input type="checkbox" class="size-checkbox"><label for="">Wicking </label>
+                </div>
+                <div>
+                    <input type="checkbox" class="size-checkbox"><label for="">Sun Protection</label>
+                </div>
+                <div>
+                    <input type="checkbox" class="size-checkbox"><label for="">Cooling</label>
+                </div>
+            </div>
+            <div class="price">
+                <p>DISCOUNT RANGE</p>
+                <div>
+                    <input type="radio" value="10" name="discount-range" onclick="discountRange()"><label for="">10% and above</label>
+                </div>
+                <div>
+                    <input type="radio" value="20" name="discount-range" onclick="discountRange()"><label for="">20% and above</label>
+                </div>
+                <div>
+                    <input type="radio" value="30" name="discount-range" onclick="discountRange()"><label for="">30% and above</label>
+                </div>
+                <div>
+                    <input type="radio" value="40" name="discount-range" onclick="discountRange()"><label for="">40% and above</label>
+                </div>
+                <div>
+                    <input type="radio" value="50" name="discount-range" onclick="discountRange()"><label for="">50% and above</label>
+                </div>
+                <div>
+                    <input type="radio" value="60" name="discount-range" onclick="discountRange()"><label for="">60% and above</label>
+                </div>
+                <div>
+                    <input type="radio" value="70" name="discount-range" onclick="discountRange()"><label for="">70% and above</label>
+                </div>
+ 
+            </div>
+        </div>
+
+        <!-- ====================all products===================================  -->
+                <div id="wrapper"></div>
+	</div>
+    </section>
+    <div class="footer"></div>
+</body>
+<script type="module" src="./JS/product-nav.js"></script>
+<script type="module" src="./JS/product-search.js"></script>
+
+<script src="./JS/product.js"></script>
+
+</html>

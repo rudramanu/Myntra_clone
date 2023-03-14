@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upstyle | Products</title>
+    <link rel="stylesheet" href="./CSS/admin_navbar.css">
+</head>
+
+<style>
+    .products{
+        width: 95%;
+        margin: auto;
+        margin-top: 1%
+    }
+    .products h2{
+        font-weight: normal;
+    }
+    .gallery{
+        width: 95%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 2%;
+        margin-bottom: 5%;
+    }
+
+    .gallery>div{
+        border: 1px solid white;
+        display: flex;
+        height: 250px;
+        background-color: violet;
+        border-radius: 5px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    .gallery>div>div{
+        /* border: 1px solid; */
+        width: 50%;
+        padding: 2%;
+        /* align-self: center; */
+    }
+
+    .gallery>div>div:nth-child(2){
+        align-self: center;
+    }
+
+    .gallery>div select{
+        width: 70%;
+        height: 25px;
+        background-color: blueviolet;
+        color: white;
+        border: 1px solid white;
+    }
+
+    .gallery>div input{
+        width: 90%;
+        margin: auto;
+        margin-top: 5%;
+        color: black;
+        border: 1px solid blueviolet;
+        outline: 0px;
+    }
+
+    .gallery>div img{
+        height: 100%;
+        display: block;
+        margin: auto;
+    }
+
+    .buttons{
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        margin-top: 5%;
+    }
+
+    .buttons>button{
+        width: 40%;
+        background-color: blueviolet;
+        color: white;
+        border: 1px solid white;
+        cursor: pointer;
+    }
+
+</style>
+
+<body>
+    <div class="nav">
+        <div>
+            <a href="./index.html">
+                <img src="./images/logo.png" alt="">
+            </a>
+        </div>
+        <div>
+            <div>
+                <a href="./admin_index.html"><h3>Orders</h3></a>
+            </div>
+            <div>
+                <a href="./admin_products.html"><h3>Products</h3></a>
+            </div>
+            <div>
+                <a href="./admin_addnew.html"><h3>Add new</h3></a>
+            </div>
+            <div>
+                <a href="./admin_users.html"><h3>Users</h3></a>
+            </div>
+            <div>
+                <a href=""><h3>Logout</h3></a>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="products">
+        <h2>Products</h2>
+        <div class="gallery">
+
+            <h1>Loading...</h1>
+
+            <!-- ====================================================================================SYNTAX==================== -->
+
+            <!-- <div class="id1">
+                <div>
+                    <img src="https://lmsin.net/cdn-cgi/image/h=831,w=615,q=60,fit=cover/https://aaeff43fe32172cbcecc-ae2a4e9a8cbc330ede5588dedf56886e.lmsin.net/lifestyle/1000012014368-Blue-Blue-1000012014368_01-2100.jpg" alt="">
+                </div>
+                <div>
+                    <select class="category" disabled>
+                        <option value="">Category</option>
+                        <option value="men">Men</option>
+                        <option value="women">Women</option>
+                    </select>
+                    <input class="title" type="text" placeholder="title" readonly>
+                    <input class="price" type="text" placeholder="price" readonly>
+                    <input class="brand" type="text" placeholder="brand" readonly>
+                    <input class="color" type="text" placeholder="color" readonly>
+                    <input class="discount" type="text" placeholder="discount" readonly>
+                    <div class="buttons">
+                        <button class="edit">Edit</button>
+                        <button class="delete">Delete</button>
+                    </div>
+                </div>
+            </div> -->
+
+
+            <!-- ================================================================================================================== -->
+
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+    let editbuttons = document.querySelectorAll(".edit");
+    console.log(editbuttons)
+    for(let elem of editbuttons){
+        elem.addEventListener("click",()=>{
+            let inputs = elem.parentElement.parentElement.childNodes
+            let id = elem.parentElement.parentElement.parentElement.className;
+            if(elem.innerText == "Edit"){
+                for(let input of inputs){
+                    input.readOnly = false;
+                    if(input.className == "category"){
+                        input.disabled = false;
+                    }
+                }
+
+                elem.innerText = "Save"
+            }
+            else{
+                let updates = {};
+                updates.id = id;
+                for(let input of inputs){
+                    input.readOnly = true;
+                    if(input.className == "category"){
+                        input.disabled = true;
+                        updates.category = input.value;
+                    }
+                    if(input.className == "title"){
+                        updates.title = input.value;
+                    }
+                    if(input.className == "price"){
+                        updates.price = input.value;
+                    }
+                    if(input.className == "color"){
+                        updates.color = input.value;
+                    }
+                    if(input.className == "brand"){
+                        updates.brand = input.value;
+                    }
+                    if(input.className == "discount"){
+                        updates.discount = input.value;
+                    }
+                }
+                console.log(updates)
+                elem.innerText = "Edit"
+            }
+        })
+    }
+
+    const url = "https://excited-deer-headscarf.cyclic.app/products"
+    try {
+        fetch(url).then(res => res.json()).then(res => render(res));
+    }
+    catch (error) {
+        console.log(err);
+        alert(err);
+    }
+
+    function render(data){
+        console.log(data);
+        let gallery = document.querySelector(".gallery");
+        gallery.innerHTML = "";
+        for(let elem of data){
+            let div = document.createElement("div");
+            div.className = elem._id;
+
+            let imgdiv = document.createElement("div");
+            let img = document.createElement("img");
+            img.src = elem.image_1;
+            imgdiv.append(img);
+            
+            let detailsdiv = document.createElement("div");
+            let select = document.createElement("select");
+            select.innerHTML = `<select class="category" disabled>
+                                    <option value="">Category</option>
+                                    <option value="male">Men</option>
+                                    <option value="female">Women</option>
+                                </select>`
+            select.value = elem.gender;
+            select.className = "category";                    
+            select.disabled = true;
+            
+            let title = document.createElement("input")
+            title.value  = elem.title;
+            title.placeholder = "title"
+            title.readOnly = true;
+            title.className = "title"
+            title.type = "text";
+
+            let price = document.createElement("input")
+            price.value  = elem.price;
+            price.placeholder = "price"
+            price.readOnly = true;
+            price.className = "price"
+            price.type = "text";
+
+            let brand = document.createElement("input")
+            brand.value  = elem.brand;
+            brand.placeholder = "brand"
+            brand.readOnly = true;
+            brand.className = "brand"
+            brand.type = "text";
+
+            let color = document.createElement("input")
+            color.value  = elem.color;
+            color.placeholder = "color"
+            color.readOnly = true;
+            color.className = "color"
+            color.type = "text";
+
+            let discount = document.createElement("input")
+            discount.value  = elem.discount;
+            discount.placeholder = "discount"
+            discount.readOnly = true;
+            discount.className = "discount"
+            discount.type = "text";
+
+            let buttondiv = document.createElement("div");
+            buttondiv.className = "buttons";
+
+            let editbutton = document.createElement("button");
+            editbutton.className = "edit";
+            editbutton.innerText = "Edit";
+
+            let deletebutton = document.createElement("button")
+            deletebutton.className = "delete";
+            deletebutton.innerText = "Delete";
+
+            buttondiv.append(editbutton,deletebutton);
+
+            detailsdiv.append(select,title,price,brand,color,discount,buttondiv);
+
+            div.append(imgdiv,detailsdiv);
+
+            gallery.append(div);
+        }
+
+        let editbuttons = document.querySelectorAll(".edit");
+        for(let elem of editbuttons){
+            elem.addEventListener("click",()=>{
+                let inputs = elem.parentElement.parentElement.childNodes
+                let id = elem.parentElement.parentElement.parentElement.className;
+                if(elem.innerText == "Edit"){
+                    for(let input of inputs){
+                        input.readOnly = false;
+                        if(input.className == "category"){
+                            input.disabled = false;
+                        }
+                    }
+
+                    elem.innerText = "Save"
+                }
+                else{
+                    let updates = {};
+                    for(let input of inputs){
+                        input.readOnly = true;
+                        if(input.className == "category"){
+                            input.disabled = true;
+                            updates.category = input.value;
+                        }
+                        if(input.className == "title"){
+                            updates.title = input.value;
+                        }
+                        if(input.className == "price"){
+                            updates.price = input.value;
+                        }
+                        if(input.className == "color"){
+                            updates.color = input.value;
+                        }
+                        if(input.className == "brand"){
+                            updates.brand = input.value;
+                        }
+                        if(input.className == "discount"){
+                            updates.discount = input.value;
+                        }
+                    }
+                    // let url = `https://excited-deer-headscarf.cyclic.app/products/update/${id}`;
+                    let url = 'https://excited-deer-headscarf.cyclic.app/products/update/63f8779ffe8de58b555f01ae'
+                    console.log(updates);
+                    try {
+                        console.log(url);
+                        fetch(url,{
+                            method:"PUT",
+                            headers:{
+                                "Content-Type":"application/json",
+                                "Authorization":JSON.stringify(localStorage.getItem("token"))
+                            },
+                            body:JSON.stringify(updates)
+                        }).then(res => console.log(res)).catch(err => console.log(err.message));
+                    }
+                    catch (error) {
+                        console.log(error.message);
+                    }
+                    elem.innerText = "Edit"
+                }
+            })
+        }
+
+        let deletebuttons = document.querySelectorAll(".delete");
+        for(let elem of deletebuttons){
+            elem.addEventListener("click",()=>{
+                let id = elem.parentElement.parentElement.parentElement.className;
+                let url = "";
+                console.log(id);
+                // try {
+                //     fetch(url,{
+                //         method:"DELETE",
+                //         headers:{
+                //             "Content-Type":"application/json",
+                //             "authorization":JSON.stringify(localStorage.get("token"))
+                //         },
+                //     }).then(res => console.log(res)).catch(err => console.log(err));
+                // }
+                // catch (error) {
+                //     console.log(error);
+                //     alert(error.message);
+                // }
+            })
+        }
+
+    }
+    
+</script>

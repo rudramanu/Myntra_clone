@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upstyle | Admin</title>
+    <link rel="stylesheet" href="./CSS/admin_navbar.css">
+</head>
+
+<style>
+    .orders{
+        width: 95%;
+        margin: auto;
+        margin-top: 1%
+    }
+    .orders h2{
+        font-weight: normal;
+    }
+
+    .gallery{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 2%;
+        margin-bottom: 5%;
+    }
+
+    .gallery>div{
+        border: 1px solid white;
+        /* display: flex; */
+        /* height: 250px; */
+        background-color: violet;
+        border-radius: 5px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        padding: 3%;
+    }
+    .gallery button{
+        width: 50%;
+        height: 30px;
+        display: block;
+        margin: auto;
+        color: white;
+        background-color: purple;
+        border: 1px solid white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .gallery p{
+        color: rgb(34, 34, 34);
+    }
+</style>
+
+<body>
+    <div class="nav">
+        <div>
+            <a href="./index.html">
+                <img src="./images/logo.png" alt="">
+            </a>
+        </div>
+        <div>
+            <div>
+                <a href="./admin_index.html"><h3>Orders</h3></a>
+            </div>
+            <div>
+                <a href="./admin_products.html"><h3>Products</h3></a>
+            </div>
+            <div>
+                <a href="./admin_addnew.html"><h3>Add new</h3></a>
+            </div>
+            <div>
+                <a href="./admin_users.html"><h3>Users</h3></a>
+            </div>
+            <div>
+                <a href=""><h3>Logout</h3></a>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="orders">
+        <h2>Orders</h2>
+
+        <div class="gallery">
+
+            <h1>Loading...</h1>
+
+            <!-- =======================================================================SYNTAX=================== -->
+
+            <!-- <div class="id1">
+                <p>Name</p>
+                <hr>
+                <p>Phone</p>
+                <hr>
+                <p>State: </p>
+                <hr>
+                <p>Locality: </p>
+                <hr>
+                <p>City:</p>
+                <hr>
+                <p>House:</p>
+                <hr>
+                <p>Items: 4</p>
+                <hr>
+                <p>Price: </p>
+                <hr>
+                <p>Placed at: </p>
+                <hr>
+                <p>Status: </p>
+                <button class="delete">Delete</button>
+            </div> -->
+
+            <!-- ====================================================================================================== -->
+
+        </div>
+
+    </div>
+</body>
+</html>
+
+<script>
+
+    url = 'https://excited-deer-headscarf.cyclic.app/orders',
+
+    getorders(url);
+
+    async function getorders(url){
+        let res = await fetch(url,{
+            method:"GET",
+            headers:{
+                "content-type":"application/json",
+                "authorization" : localStorage.getItem("token")
+            }
+        })
+
+        if(res.ok){
+            let data = await res.json();
+            console.log(data);
+            render(data);
+        }
+        else{
+            console.log(res);
+        }
+    }
+
+    function render(data){
+        let gallery = document.querySelector(".gallery");
+        gallery.innerHTML = "";
+        for(let elem of data){
+            let div = document.createElement("div");
+            div.className = elem._id;
+
+            let name = document.createElement("p");
+            name.innerText = elem.address.name;
+
+            let phone = document.createElement("p");
+            phone.innerText = elem.address.mobile;
+
+            let state = document.createElement("p");
+            state.innerText = `State: ${elem.address.state}`
+
+            let locality = document.createElement("p");
+            locality.innerText = elem.address.locality;
+
+            let city = document.createElement("p");
+            city.innerText = `Locality: ${elem.address.city}`;
+
+            let house = document.createElement("p");
+            house.innerText = elem.address.city;
+
+            let items = document.createElement("p");
+            items.innerText = `Items: ${elem.order.length}`
+
+            let placed = document.createElement("p");
+            placed.innerText = `Placed At: ${elem.placedAt}`;
+
+            let price = document.createElement("p");
+            price.innerText = `Price: ${elem.price}`;
+
+            let status = document.createElement("p");
+            status.innerText = `Status: ${elem.status}`
+
+            let hr1 = document.createElement("hr");
+            let hr2 = document.createElement("hr");
+            let hr3 = document.createElement("hr");
+            let hr4 = document.createElement("hr");
+            let hr5 = document.createElement("hr");
+            let hr6 = document.createElement("hr");
+            let hr7 = document.createElement("hr");
+            let hr8 = document.createElement("hr");
+            let hr9 = document.createElement("hr");
+            let hr10 = document.createElement("hr");
+            
+            div.append(name,hr2,phone,hr3,state,hr4,locality,hr5,city,hr6,house,hr7,items,hr8,placed,hr9,price,hr10,status);
+
+            gallery.append(div);
+
+        }
+
+    }
+</script>
